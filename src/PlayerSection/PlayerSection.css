@@ -1,0 +1,67 @@
+.playersection-main-wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  height: 100%;
+  padding-left: 140px;
+  padding-right: 140px;
+  justify-content: center;
+}
+
+.playersection-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 4;
+}
+
+.title-content {
+  color: white;
+  font-size: 20px;
+  text-align: left;
+  width: 100%;
+}
+
+.subTitle-content {
+  color: grey;
+  font-size: 12px;
+  text-align: left;
+  width: 100%;
+}
+
+.cover-photo-style {
+  width: 100%;
+  height: auto;
+  margin-top: 20px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.option-button {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 15px;
+  height: 35px;
+  border: none;
+  cursor: pointer;
+}
+
+.play-button {
+  background-color: white;
+  border-radius: 20px;
+  height: 33px;
+  border: none;
+  cursor: pointer;
+}
+
+.volume-button {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 15px;
+  height: 35px;
+  border: none;
+  cursor: pointer;
+}

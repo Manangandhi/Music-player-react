@@ -1,0 +1,13 @@
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  height: 100%;
+}
+
+.title-container {
+  text-align: left;
+  margin-top: 30px;
+  color: white;
+  font-size: 28px;
+}

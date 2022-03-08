@@ -1,56 +1,66 @@
-const ListItems = () => {
+import { CircularProgress } from "@mui/material";
+import moment from "moment";
+import momentDurationFormatSetup from "moment-duration-format";
+import "./ListItems.css";
+
+momentDurationFormatSetup(moment);
+const ListItems = ({
+  songs,
+  searchInput,
+  loading,
+  handleSongClick,
+  selectedSong,
+}) => {
+  const filteredSongs = songs?.filter((s) => {
+    if (searchInput === "") {
+      return s;
+    } else {
+      return s?.title?.toLowerCase().includes(searchInput);
+    }
+  });
+
   return (
-    <ul style={{ marginTop: "10px" }}>
-      {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((li) => {
-        return (
-          <li
-            style={{
-              background: "black",
-              width: "400px",
-              height: "70px",
-            }}
-          >
-            <div style={{ display: "flex" }}>
-              <img
-                alt="song_logo"
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ22H-et3cLZZfMf8uFawJt_8y3nZ-Y1u2wWg&usqp=CAU"
-                style={{
-                  verticalAlign: "middle",
-                  width: "48px",
-                  height: "48px",
-                  borderRadius: "56px",
-                }}
-              />
-              <div
-                style={{
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <div style={{ marginLeft: "10px", textAlign: "left" }}>
-                  <span style={{ color: "white", fontSize: "18px" }}>
-                    Starboy
-                  </span>
-                  <p style={{ color: "grey", fontSize: "14px" }}>The Weekend</p>
-                </div>
-                <div>
-                  <span
-                    style={{
-                      color: "grey",
-                      fontSize: "15px",
-                      padding: "10px",
-                    }}
-                  >
-                    12:20
-                  </span>
+    <ul className="list-container">
+      {loading ? (
+        <CircularProgress color="primary" sx={{ marginTop: "100px" }} />
+      ) : (
+        filteredSongs?.map((song) => {
+          return (
+            <li
+              onClick={() => handleSongClick(song?._id)}
+              key={song?._id}
+              className="list-item-container"
+              style={{
+                backgroundColor:
+                  selectedSong === song?._id
+                    ? "rgba(255, 255, 255, 0.15)"
+                    : "black",
+              }}
+            >
+              <div className="item-information-container">
+                <img
+                  alt="song_logo"
+                  src={song?.photo}
+                  className="photo-style"
+                />
+                <div className="info-main-container">
+                  <div className="info-content">
+                    <span className="title-content">{song?.title}</span>
+                    <p className="artist-content">{song?.artist}</p>
+                  </div>
+                  <div>
+                    <span className="time-style">
+                      {moment
+                        .duration(song?.duration, "seconds")
+                        .format("H:mm:ss")}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </li>
-        );
-      })}
+            </li>
+          );
+        })
+      )}
     </ul>
   );
 };

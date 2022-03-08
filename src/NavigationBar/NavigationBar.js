@@ -1,6 +1,20 @@
+import { useQuery } from "@apollo/client";
+import { useState } from "react";
+import { useEffect } from "react";
+import { GET_PLAYLISTS } from "../GraphQL/playListQuery";
 import "./NavigationBar.css";
 
-const NavigationBar = () => {
+const NavigationBar = ({ handleSelectPlayList, selectedState }) => {
+  const { data } = useQuery(GET_PLAYLISTS);
+
+  const [playLists, setPlayLists] = useState([]);
+
+  useEffect(() => {
+    if (data) {
+      setPlayLists(data.getPlaylists);
+    }
+  }, [data]);
+
   return (
     <div className="navigation-container">
       <img
@@ -11,10 +25,23 @@ const NavigationBar = () => {
 
       <div className="navigation-list-container">
         <ul>
-          <li className="navigation-item-container">For You</li>
-          <li className="navigation-item-container">Top Tracks</li>
-          <li className="navigation-item-container">Favourites</li>
-          <li className="navigation-item-container">Recently Played</li>
+          {playLists?.map((li) => {
+            return (
+              <li
+                key={li?.id}
+                onClick={() => handleSelectPlayList(li)}
+                className="navigation-item-container"
+                style={{
+                  color:
+                    selectedState && selectedState?.id === li?.id
+                      ? "white"
+                      : "rgba(255, 255, 255, 0.50)",
+                }}
+              >
+                {li?.title}
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>

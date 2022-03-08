@@ -1,0 +1,54 @@
+.list-container {
+  margin-top: 10px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.list-container::-webkit-scrollbar {
+  display: none;
+}
+
+.list-item-container {
+  width: 400px;
+  height: 70px;
+  cursor: pointer;
+}
+
+.item-information-container {
+  display: flex;
+}
+
+.photo-style {
+  vertical-align: middle;
+  width: 48px;
+  height: 48px;
+  border-radius: 56px;
+}
+
+.info-main-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info-content {
+  margin-left: 10px;
+  text-align: left;
+}
+
+.title-content {
+  color: white;
+  font-size: 18px;
+}
+
+.artist-content {
+  color: grey;
+  font-size: 14px;
+}
+
+.time-style {
+  color: grey;
+  font-size: 15px;
+  padding: 10px;
+}
