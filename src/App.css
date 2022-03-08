@@ -9,12 +9,12 @@
   height: 100%;
 }
 
-.App-container div {
+/* .App-container div {
   height: 100%;
-}
+} */
 
 .navigation-container {
-  flex: 1.5;
+  flex: 1;
   background: #e5e5e5;
 }
 
@@ -23,7 +23,7 @@
 }
 
 .player-container {
-  flex: 4;
+  flex: 3;
 }
 
 .App-logo {
