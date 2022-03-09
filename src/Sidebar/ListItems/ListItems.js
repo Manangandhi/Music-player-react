@@ -10,15 +10,15 @@ const ListItems = ({ songs, loading, handleSongClick, selectedSong }) => {
       {loading ? (
         <CircularProgress color="primary" sx={{ marginTop: "100px" }} />
       ) : (
-        songs?.map((song) => {
+        songs?.map((song, idx) => {
           return (
             <li
-              onClick={() => handleSongClick(song?._id)}
+              onClick={() => handleSongClick(song, idx)}
               key={song?._id}
               className="list-item-container"
               style={{
                 backgroundColor:
-                  selectedSong === song?._id
+                  selectedSong?._id === song?._id
                     ? "rgba(255, 255, 255, 0.15)"
                     : "black",
               }}

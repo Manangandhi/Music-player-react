@@ -1,22 +1,32 @@
 import { LinearProgress } from "@mui/material";
-import coverPhoto from "../images/Cover.png";
 import FastRewindIcon from "@mui/icons-material/FastRewind";
 import FastForwardIcon from "@mui/icons-material/FastForward";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import PlayArrow from "@mui/icons-material/PlayArrow";
+import PauseIcon from "@mui/icons-material/Pause";
 import "./PlayerSection.css";
 
-const PlayerSection = () => {
+const PlayerSection = ({
+  selectedSong,
+  playMusic,
+  pauseMusic,
+  rewindMusic,
+  forwardMusic,
+}) => {
   return (
     <div className="playersection-main-wrapper">
       <div className="playersection-wrapper">
-        <h1 className="title-content">Viva La Vida</h1>
+        <h1 className="title-content">{selectedSong?.title}</h1>
 
-        <span className="subTitle-content">Coldplay</span>
+        <span className="subTitle-content">{selectedSong?.artist}</span>
 
         {/* Cover photo */}
-        <img src={coverPhoto} alt="cover" className="cover-photo-style" />
+        <img
+          src={selectedSong?.photo}
+          alt="cover"
+          className="cover-photo-style"
+        />
 
         {/* Progress bar */}
 
@@ -32,12 +42,41 @@ const PlayerSection = () => {
             <MoreHorizIcon sx={styles.optionButton} />
           </button>
           <div>
-            <FastRewindIcon sx={styles.commonButtonWrapper} />
-
-            <button type="button" className="play-button">
-              <PlayArrow sx={styles.playButton} />
+            {/* Rewind Button */}
+            <button
+              onClick={() => rewindMusic(selectedSong)}
+              type="button"
+              className="rewind-button"
+            >
+              <FastRewindIcon sx={styles.commonButtonWrapper} />
             </button>
-            <FastForwardIcon sx={styles.commonButtonWrapper} />
+
+            {/* Play and Pause Buttons */}
+
+            {selectedSong?.status === "play" ? (
+              <button
+                onClick={() => pauseMusic()}
+                type="button"
+                className="play-button"
+              >
+                <PauseIcon sx={styles.playButton} />
+              </button>
+            ) : (
+              <button
+                onClick={() => playMusic()}
+                type="button"
+                className="play-button"
+              >
+                <PlayArrow sx={styles.playButton} />
+              </button>
+            )}
+            <button
+              onClick={() => forwardMusic(selectedSong)}
+              type="button"
+              className="forward-button"
+            >
+              <FastForwardIcon sx={styles.commonButtonWrapper} />
+            </button>
           </div>
           <button type="button" className="volume-button">
             <VolumeUpIcon sx={styles.commonButtonWrapper} />

@@ -5,9 +5,8 @@ import ListItems from "./ListItems/ListItems";
 import SearchBar from "./Searchbar/SearchBar";
 import "./Sidebar.css";
 
-const Sidebar = ({ selectedState }) => {
+const Sidebar = ({ selectedState, playMusic, setNowPlaying, selectedSong }) => {
   const [searchInput, setSearchInput] = useState("");
-  const [selectedSong, setSelectedSong] = useState();
 
   const handleInputChange = (e) => {
     let lowerCase = e.target.value.toLowerCase();
@@ -18,10 +17,13 @@ const Sidebar = ({ selectedState }) => {
     variables: { playlistId: selectedState?.id || 1, search: searchInput },
   });
 
-  const handleSongClick = (id) => {
-    setSelectedSong(id);
+  const handleSongClick = (song, idx) => {
+    setNowPlaying({
+      playlistId: selectedState?.id,
+      queue: data?.getSongs || [],
+    });
+    playMusic(song, idx);
   };
-
   return (
     <div className="sidebar-container">
       <h1 className="title-container">{selectedState?.title || "For You"}</h1>

@@ -1,7 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { CircularProgress } from "@mui/material";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { GET_PLAYLISTS } from "../GraphQL/playListQuery";
 import "./NavigationBar.css";
 
