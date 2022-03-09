@@ -1,11 +1,12 @@
 import { useQuery } from "@apollo/client";
+import { CircularProgress } from "@mui/material";
 import { useState } from "react";
 import { useEffect } from "react";
 import { GET_PLAYLISTS } from "../GraphQL/playListQuery";
 import "./NavigationBar.css";
 
 const NavigationBar = ({ handleSelectPlayList, selectedState }) => {
-  const { data } = useQuery(GET_PLAYLISTS);
+  const { data, loading } = useQuery(GET_PLAYLISTS);
 
   const [playLists, setPlayLists] = useState([]);
 
@@ -25,23 +26,33 @@ const NavigationBar = ({ handleSelectPlayList, selectedState }) => {
 
       <div className="navigation-list-container">
         <ul>
-          {playLists?.map((li) => {
-            return (
-              <li
-                key={li?.id}
-                onClick={() => handleSelectPlayList(li)}
-                className="navigation-item-container"
-                style={{
-                  color:
-                    selectedState && selectedState?.id === li?.id
-                      ? "white"
-                      : "rgba(255, 255, 255, 0.50)",
-                }}
-              >
-                {li?.title}
-              </li>
-            );
-          })}
+          {loading ? (
+            <CircularProgress
+              color="primary"
+              sx={{
+                width: "100%",
+                marginTop: "30px",
+              }}
+            />
+          ) : (
+            playLists?.map((li) => {
+              return (
+                <li
+                  key={li?.id}
+                  onClick={() => handleSelectPlayList(li)}
+                  className="navigation-item-container"
+                  style={{
+                    color:
+                      selectedState && selectedState?.id === li?.id
+                        ? "white"
+                        : "rgba(255, 255, 255, 0.50)",
+                  }}
+                >
+                  {li?.title}
+                </li>
+              );
+            })
+          )}
         </ul>
       </div>
     </div>

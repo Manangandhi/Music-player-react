@@ -4,27 +4,13 @@ import momentDurationFormatSetup from "moment-duration-format";
 import "./ListItems.css";
 
 momentDurationFormatSetup(moment);
-const ListItems = ({
-  songs,
-  searchInput,
-  loading,
-  handleSongClick,
-  selectedSong,
-}) => {
-  const filteredSongs = songs?.filter((s) => {
-    if (searchInput === "") {
-      return s;
-    } else {
-      return s?.title?.toLowerCase().includes(searchInput);
-    }
-  });
-
+const ListItems = ({ songs, loading, handleSongClick, selectedSong }) => {
   return (
     <ul className="list-container">
       {loading ? (
         <CircularProgress color="primary" sx={{ marginTop: "100px" }} />
       ) : (
-        filteredSongs?.map((song) => {
+        songs?.map((song) => {
           return (
             <li
               onClick={() => handleSongClick(song?._id)}

@@ -29,7 +29,6 @@ const Sidebar = ({ selectedState }) => {
       <ListItems
         loading={loading}
         songs={data?.getSongs}
-        searchInput={searchInput}
         handleSongClick={handleSongClick}
         selectedSong={selectedSong}
       />
