@@ -6,14 +6,12 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import PlayArrow from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
 import "./PlayerSection.css";
+import { forwardRef } from "react";
 
-const PlayerSection = ({
-  selectedSong,
-  playMusic,
-  pauseMusic,
-  rewindMusic,
-  forwardMusic,
-}) => {
+const PlayerSection = (
+  { selectedSong, playMusic, pauseMusic, rewindMusic, forwardMusic },
+  playerImageRef
+) => {
   return (
     <div className="playersection-main-wrapper">
       <div className="playersection-wrapper">
@@ -23,6 +21,7 @@ const PlayerSection = ({
 
         {/* Cover photo */}
         <img
+          ref={playerImageRef}
           src={selectedSong?.photo}
           alt="cover"
           className="cover-photo-style"
@@ -87,7 +86,7 @@ const PlayerSection = ({
   );
 };
 
-export default PlayerSection;
+export default forwardRef(PlayerSection);
 
 const styles = {
   progressBar: {

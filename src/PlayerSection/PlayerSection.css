@@ -1,7 +1,7 @@
 .playersection-main-wrapper {
   display: flex;
   flex-direction: column;
-  background-color: black;
+  /* background-color: black; */
   height: 100%;
   padding-left: 140px;
   padding-right: 140px;
@@ -24,7 +24,7 @@
 }
 
 .subTitle-content {
-  color: grey;
+  color: rgb(180, 179, 179);
   font-size: 12px;
   text-align: left;
   width: 100%;

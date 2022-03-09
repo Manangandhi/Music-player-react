@@ -1,12 +1,19 @@
+import { useEffect, useRef, useState } from "react";
+import FastAverageColor from "fast-average-color";
 import NavigationBar from "./NavigationBar/NavigationBar";
 import PlayerSection from "./PlayerSection/PlayerSection";
 import Sidebar from "./Sidebar/Sidebar";
 import "./App.css";
-import { useRef, useState } from "react";
+
+const fac = new FastAverageColor();
 
 const MusicPlayerComponent = () => {
   const [selectedState, setSelectedState] = useState();
   const [selectedSong, setSelectedSong] = useState();
+
+  const [appBgColor, setAppBgColor] = useState("black");
+
+  const playerImageRef = useRef(null);
 
   const [nowPlaying, setNowPlaying] = useState({
     playlistId: null,
@@ -80,8 +87,30 @@ const MusicPlayerComponent = () => {
     }
   };
 
+  useEffect(() => {
+    if (selectedSong?._id && playerImageRef.current) {
+      const newImg = playerImageRef.current.cloneNode(true);
+      newImg.crossOrigin = "Anonymous";
+      fac
+        .getColorAsync(newImg)
+        .then((color) => {
+          setAppBgColor(
+            `linear-gradient(to top, rgba(0,0,0) 0%, ${color.rgba} 100%)`
+          );
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+  }, [selectedSong?._id]);
+
   return (
-    <>
+    <div
+      className="App-container"
+      style={{
+        background: appBgColor,
+      }}
+    >
       <div className="navigation-container">
         <NavigationBar
           handleSelectPlayList={handleSelectPlayList}
@@ -101,6 +130,7 @@ const MusicPlayerComponent = () => {
 
       <div className="player-container">
         <PlayerSection
+          ref={playerImageRef}
           selectedSong={selectedSong}
           playMusic={playMusic}
           pauseMusic={pauseMusic}
@@ -108,7 +138,7 @@ const MusicPlayerComponent = () => {
           forwardMusic={forwardMusic}
         />
       </div>
-    </>
+    </div>
   );
 };
 

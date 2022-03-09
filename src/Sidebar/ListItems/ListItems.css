@@ -12,6 +12,7 @@
   width: 400px;
   height: 70px;
   cursor: pointer;
+  padding: 4px;
 }
 
 .item-information-container {
@@ -43,12 +44,12 @@
 }
 
 .artist-content {
-  color: grey;
+  color: rgb(180, 179, 179);
   font-size: 14px;
 }
 
 .time-style {
-  color: grey;
+  color: rgb(180, 179, 179);
   font-size: 15px;
   padding: 10px;
 }

@@ -20,7 +20,7 @@ const ListItems = ({ songs, loading, handleSongClick, selectedSong }) => {
                 backgroundColor:
                   selectedSong?._id === song?._id
                     ? "rgba(255, 255, 255, 0.15)"
-                    : "black",
+                    : "",
               }}
             >
               <div className="item-information-container">
