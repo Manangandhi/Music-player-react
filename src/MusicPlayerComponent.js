@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import FastAverageColor from "fast-average-color";
 import NavigationBar from "./NavigationBar/NavigationBar";
 import PlayerSection from "./PlayerSection/PlayerSection";
@@ -6,23 +6,23 @@ import Sidebar from "./Sidebar/Sidebar";
 import "./App.css";
 
 const fac = new FastAverageColor();
+let googleProxyURL =
+  "https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&refresh=2592000&url=";
 
 const MusicPlayerComponent = () => {
-  const [selectedState, setSelectedState] = useState();
+  const [selectedPlaylist, setSelectedPlaylist] = useState();
   const [selectedSong, setSelectedSong] = useState();
 
   const [appBgColor, setAppBgColor] = useState("black");
-
-  const playerImageRef = useRef(null);
 
   const [nowPlaying, setNowPlaying] = useState({
     playlistId: null,
     queue: [],
   });
 
-  const handleSelectPlayList = (selectedPlaylist) => {
-    setSelectedState(selectedPlaylist);
-  };
+  const handleSelectPlayList = useCallback((selectedPlaylist) => {
+    setSelectedPlaylist(selectedPlaylist);
+  }, []);
 
   const mediaElement = useRef(null);
 
@@ -36,7 +36,7 @@ const MusicPlayerComponent = () => {
         ...s,
         status: "play",
         idx: idx,
-        playlistId: selectedState?.id,
+        playlistId: selectedPlaylist?.id,
       }));
     }
     if (!selectedSong) {
@@ -45,7 +45,7 @@ const MusicPlayerComponent = () => {
         ...song,
         status: "play",
         idx: idx,
-        playlistId: selectedState?.id,
+        playlistId: selectedPlaylist?.id,
       });
     } else if (selectedSong._id !== song._id) {
       mediaElement.current.pause();
@@ -55,7 +55,7 @@ const MusicPlayerComponent = () => {
         ...song,
         status: "play",
         idx: idx,
-        playlistId: selectedState?.id,
+        playlistId: selectedPlaylist?.id,
       });
     } else {
       //  If same song is clicked again
@@ -88,8 +88,10 @@ const MusicPlayerComponent = () => {
   };
 
   useEffect(() => {
-    if (selectedSong?._id && playerImageRef.current) {
-      const newImg = playerImageRef.current.cloneNode(true);
+    if (selectedSong?._id) {
+      const newImg = new Image();
+      let newSrc = googleProxyURL + encodeURIComponent(selectedSong?.photo);
+      newImg.src = newSrc;
       newImg.crossOrigin = "Anonymous";
       fac
         .getColorAsync(newImg)
@@ -102,26 +104,27 @@ const MusicPlayerComponent = () => {
           console.log(e);
         });
     }
-  }, [selectedSong?._id]);
+  }, [selectedSong?._id, selectedSong?.photo]);
 
   return (
     <div
       className="App-container"
       style={{
         background: appBgColor,
+        transition: `all 1s linear`,
       }}
     >
       <div className="navigation-container">
         <NavigationBar
           handleSelectPlayList={handleSelectPlayList}
-          selectedState={selectedState}
+          selectedPlaylist={selectedPlaylist}
         />
       </div>
 
       <div className="sidebar-container">
         <Sidebar
           setNowPlaying={setNowPlaying}
-          selectedState={selectedState}
+          selectedPlaylist={selectedPlaylist}
           playMusic={playMusic}
           pauseMusic={pauseMusic}
           selectedSong={selectedSong}
@@ -130,7 +133,6 @@ const MusicPlayerComponent = () => {
 
       <div className="player-container">
         <PlayerSection
-          ref={playerImageRef}
           selectedSong={selectedSong}
           playMusic={playMusic}
           pauseMusic={pauseMusic}

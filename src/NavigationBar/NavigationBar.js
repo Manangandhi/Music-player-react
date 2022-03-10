@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { GET_PLAYLISTS } from "../GraphQL/playListQuery";
 import "./NavigationBar.css";
 
-const NavigationBar = ({ handleSelectPlayList, selectedState }) => {
+const NavigationBar = ({ handleSelectPlayList, selectedPlaylist }) => {
   const { data, loading } = useQuery(GET_PLAYLISTS);
 
   const [playLists, setPlayLists] = useState([]);
@@ -12,8 +12,11 @@ const NavigationBar = ({ handleSelectPlayList, selectedState }) => {
   useEffect(() => {
     if (data) {
       setPlayLists(data.getPlaylists);
+      if (!selectedPlaylist) {
+        handleSelectPlayList(data?.getPlaylists[0]);
+      }
     }
-  }, [data]);
+  }, [data, handleSelectPlayList, selectedPlaylist]);
 
   return (
     <div className="navigation-container">
@@ -42,7 +45,7 @@ const NavigationBar = ({ handleSelectPlayList, selectedState }) => {
                   className="navigation-item-container"
                   style={{
                     color:
-                      selectedState && selectedState?.id === li?.id
+                      selectedPlaylist && selectedPlaylist?.id === li?.id
                         ? "white"
                         : "rgba(255, 255, 255, 0.50)",
                   }}

@@ -5,7 +5,12 @@ import ListItems from "./ListItems/ListItems";
 import SearchBar from "./Searchbar/SearchBar";
 import "./Sidebar.css";
 
-const Sidebar = ({ selectedState, playMusic, setNowPlaying, selectedSong }) => {
+const Sidebar = ({
+  selectedPlaylist,
+  playMusic,
+  setNowPlaying,
+  selectedSong,
+}) => {
   const [searchInput, setSearchInput] = useState("");
 
   const handleInputChange = (e) => {
@@ -14,19 +19,25 @@ const Sidebar = ({ selectedState, playMusic, setNowPlaying, selectedSong }) => {
   };
 
   const { data, loading } = useQuery(GET_SONGS, {
-    variables: { playlistId: selectedState?.id || 1, search: searchInput },
+    variables: {
+      playlistId: selectedPlaylist?.id,
+      search: searchInput,
+    },
+    skip: !Boolean(selectedPlaylist?.id),
   });
 
   const handleSongClick = (song, idx) => {
     setNowPlaying({
-      playlistId: selectedState?.id,
+      playlistId: selectedPlaylist?.id,
       queue: data?.getSongs || [],
     });
     playMusic(song, idx);
   };
   return (
     <div className="sidebar-container">
-      <h1 className="title-container">{selectedState?.title || "For You"}</h1>
+      <h1 className="title-container">
+        {selectedPlaylist?.title || "For You"}
+      </h1>
       <SearchBar handleChange={handleInputChange} />
       <ListItems
         loading={loading}
