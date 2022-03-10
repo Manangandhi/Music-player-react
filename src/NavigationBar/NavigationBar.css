@@ -1,17 +1,22 @@
 .navigation-container {
   display: flex;
   flex-direction: column;
-  /* background-color: black; */
+  height: 100%;
+  width: 100%;
+  flex: 1;
 }
 
 .logo-container {
-  width: 90px;
+  max-width: 90px;
   margin-top: 20px;
-  margin-left: 33px;
+  margin-left: 23px;
 }
 
 .navigation-list-container {
-  margin-top: 20px;
+  margin-top: 40px;
+  margin-left: 10px;
+  height: 100%;
+  width: 100%;
 }
 
 .navigation-item-container {

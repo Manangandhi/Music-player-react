@@ -1,11 +1,9 @@
 .playersection-main-wrapper {
   display: flex;
   flex-direction: column;
-  /* background-color: black; */
   height: 100%;
-  padding-left: 140px;
-  padding-right: 140px;
   justify-content: center;
+  flex: 2;
 }
 
 .playersection-wrapper {
@@ -13,7 +11,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex: 4;
 }
 
 .title-content {
@@ -34,6 +31,7 @@
 .cover-photo-style {
   width: 100%;
   height: auto;
+  max-height: 30rem;
   margin-top: 20px;
 }
 
@@ -46,17 +44,22 @@
 .option-button {
   background-color: rgba(255, 255, 255, 0.15);
   border-radius: 15px;
-  height: 35px;
+  height: 30px;
   border: none;
   cursor: pointer;
+  width: 30px;
+  margin: 6px;
 }
 
 .play-button {
   background-color: white;
-  border-radius: 20px;
-  height: 33px;
+  border-radius: 15px;
+  height: 30px;
   border: none;
   cursor: pointer;
+  width: 30px;
+  margin: 6px;
+  padding: 2px;
 }
 
 .play-button:disabled {
@@ -66,16 +69,20 @@
 .volume-button {
   background-color: rgba(255, 255, 255, 0.15);
   border-radius: 15px;
-  height: 35px;
+  height: 30px;
   border: none;
   cursor: pointer;
+  width: 30px;
+  margin: 6px;
 }
 
 .rewind-button,
 .forward-button {
   background-color: black;
   border-radius: 15px;
-  height: 35px;
+  height: 30px;
   border: none;
   cursor: pointer;
+  width: 30px;
+  margin: 6px;
 }

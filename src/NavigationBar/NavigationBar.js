@@ -1,22 +1,17 @@
-import { useQuery } from "@apollo/client";
 import { CircularProgress } from "@mui/material";
-import { useState, useEffect } from "react";
-import { GET_PLAYLISTS } from "../GraphQL/playListQuery";
 import "./NavigationBar.css";
 
-const NavigationBar = ({ handleSelectPlayList, selectedPlaylist }) => {
-  const { data, loading } = useQuery(GET_PLAYLISTS);
-
-  const [playLists, setPlayLists] = useState([]);
-
-  useEffect(() => {
-    if (data) {
-      setPlayLists(data.getPlaylists);
-      if (!selectedPlaylist) {
-        handleSelectPlayList(data?.getPlaylists[0]);
-      }
-    }
-  }, [data, handleSelectPlayList, selectedPlaylist]);
+const NavigationBar = ({
+  handleSelectPlayList,
+  setCurrentViewResponsive,
+  selectedPlaylist,
+  loading,
+  playLists,
+}) => {
+  const handleClickPlaylist = (li) => {
+    handleSelectPlayList(li);
+    setCurrentViewResponsive("songs");
+  };
 
   return (
     <div className="navigation-container">
@@ -41,7 +36,7 @@ const NavigationBar = ({ handleSelectPlayList, selectedPlaylist }) => {
               return (
                 <li
                   key={li?.id}
-                  onClick={() => handleSelectPlayList(li)}
+                  onClick={() => handleClickPlaylist(li)}
                   className="navigation-item-container"
                   style={{
                     color:

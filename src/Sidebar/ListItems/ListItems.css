@@ -1,5 +1,5 @@
 .list-container {
-  margin-top: 10px;
+  /* margin-top: 10px; */
   height: 100%;
   overflow-y: auto;
 }
@@ -9,10 +9,9 @@
 }
 
 .list-item-container {
-  width: 400px;
-  height: 70px;
+  width: 100%;
   cursor: pointer;
-  padding: 4px;
+  padding: 9px;
 }
 
 .item-information-container {
@@ -40,12 +39,13 @@
 
 .title-content {
   color: white;
-  font-size: 18px;
+  font-size: 1rem;
 }
 
 .artist-content {
   color: rgb(180, 179, 179);
-  font-size: 14px;
+  padding: 2px;
+  font-size: 12px;
 }
 
 .time-style {

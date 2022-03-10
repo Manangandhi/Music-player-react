@@ -14,9 +14,13 @@ const PlayerSection = ({
   pauseMusic,
   rewindMusic,
   forwardMusic,
+  isMobile,
 }) => {
   return (
-    <div className="playersection-main-wrapper">
+    <div
+      className="playersection-main-wrapper"
+      style={{ padding: isMobile ? "4%" : "8%" }}
+    >
       <div className="playersection-wrapper">
         <h1 className="title-content">{selectedSong?.title}</h1>
 
@@ -113,9 +117,9 @@ const styles = {
     marginTop: "30px",
     marginBottom: "20px",
   },
-  optionButton: { color: "white", padding: "5px" },
-  commonButtonWrapper: { color: "white", padding: "5px" },
-  playButton: { color: "black", padding: "5px" },
+  optionButton: { color: "white" },
+  commonButtonWrapper: { color: "white" },
+  playButton: { color: "black" },
   buttonDisabled: {
     color: "gray",
     padding: "5px",

@@ -29,7 +29,7 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "start",
-    width: 400,
+    width: "100%",
     marginTop: "15px",
   },
   inputWrapper: { ml: 1, color: "white", width: "100%" },
