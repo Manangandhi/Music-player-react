@@ -3,9 +3,9 @@ import FastAverageColor from "fast-average-color";
 import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
 import PlaylistPlayIcon from "@mui/icons-material/PlaylistPlay";
 import ListIcon from "@mui/icons-material/List";
-import NavigationBar from "./Components/PlaylistSection/PlaylistSection";
+import PlaylistSection from "./Components/PlaylistSection/PlaylistSection";
 import PlayerSection from "./Components/PlayerSection/PlayerSection";
-import Sidebar from "./Components/SongListSection/SongListSection";
+import SongListSection from "./Components/SongListSection/SongListSection";
 import { useMediaQuery } from "@mui/material";
 import { GET_PLAYLISTS } from "./GraphQL/playListQuery";
 import { useQuery } from "@apollo/client";
@@ -155,7 +155,7 @@ const MainComponent = () => {
       }}
     >
       {(!isMobile || currentViewResponsive === "playlist") && (
-        <NavigationBar
+        <PlaylistSection
           setCurrentViewResponsive={setCurrentViewResponsive}
           handleSelectPlayList={handleSelectPlayList}
           selectedPlaylist={selectedPlaylist}
@@ -165,7 +165,7 @@ const MainComponent = () => {
       )}
 
       {(!isMobile || currentViewResponsive === "songs") && (
-        <Sidebar
+        <SongListSection
           setNowPlaying={setNowPlaying}
           selectedPlaylist={selectedPlaylist}
           playMusic={playMusic}

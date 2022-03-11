@@ -1,4 +1,4 @@
-import ListItems from "./SongList/SongList";
+import SongList from "./SongList/SongList";
 import SearchBar from "./Searchbar/SearchBar";
 import "./SongListSection.css";
 
@@ -24,7 +24,7 @@ const Sidebar = ({
         {selectedPlaylist?.title || "For You"}
       </h1>
       <SearchBar handleChange={handleInputChange} />
-      <ListItems
+      <SongList
         loading={loading}
         songs={data?.getSongs}
         handleSongClick={handleSongClick}
