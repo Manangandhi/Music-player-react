@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import "./fonts/BasierCircle-Regular.otf";
+import "./assets/fonts/BasierCircle-Regular.otf";
 
 ReactDOM.render(
   <React.StrictMode>
