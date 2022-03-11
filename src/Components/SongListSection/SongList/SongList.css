@@ -2,7 +2,7 @@
   /* margin-top: 10px; */
   height: 100%;
   overflow-y: auto;
-  padding-bottom: 25px;
+  padding-bottom: 20px;
 }
 
 .list-container::-webkit-scrollbar {
