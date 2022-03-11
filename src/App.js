@@ -7,7 +7,7 @@ import {
   from,
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
-import MusicPlayerComponent from "./MusicPlayerComponent";
+import MusicPlayerComponent from "./MainComponent";
 
 const errorLink = onError(({ graphqlErrors, networkError }) => {
   if (graphqlErrors) {

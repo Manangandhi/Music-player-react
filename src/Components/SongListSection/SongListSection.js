@@ -1,6 +1,6 @@
-import ListItems from "./ListItems/ListItems";
+import ListItems from "./SongList/SongList";
 import SearchBar from "./Searchbar/SearchBar";
-import "./Sidebar.css";
+import "./SongListSection.css";
 
 const Sidebar = ({
   selectedPlaylist,

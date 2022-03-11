@@ -3,20 +3,20 @@ import FastAverageColor from "fast-average-color";
 import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
 import PlaylistPlayIcon from "@mui/icons-material/PlaylistPlay";
 import ListIcon from "@mui/icons-material/List";
-import NavigationBar from "./NavigationBar/NavigationBar";
-import PlayerSection from "./PlayerSection/PlayerSection";
-import Sidebar from "./Sidebar/Sidebar";
-import "./App.css";
+import NavigationBar from "./Components/PlaylistSection/PlaylistSection";
+import PlayerSection from "./Components/PlayerSection/PlayerSection";
+import Sidebar from "./Components/SongListSection/SongListSection";
 import { useMediaQuery } from "@mui/material";
 import { GET_PLAYLISTS } from "./GraphQL/playListQuery";
 import { useQuery } from "@apollo/client";
 import { GET_SONGS } from "./GraphQL/songQuery";
+import "./MainComponent.css";
 
 const fac = new FastAverageColor();
 let googleProxyURL =
   "https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&refresh=2592000&url=";
 
-const MusicPlayerComponent = () => {
+const MainComponent = () => {
   const [selectedPlaylist, setSelectedPlaylist] = useState();
   const [selectedSong, setSelectedSong] = useState();
 
@@ -144,8 +144,6 @@ const MusicPlayerComponent = () => {
     }
   }, [selectedSong?._id, selectedSong?.photo]);
 
-  console.log("song", songsData);
-
   const [currentViewResponsive, setCurrentViewResponsive] = useState("player");
 
   return (
@@ -189,26 +187,12 @@ const MusicPlayerComponent = () => {
         />
       )}
       {isMobile && (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "max-content",
-            width: "100%",
-          }}
-        >
+        <div className="responsive-button-container">
           <button
+            className="playlist-button"
             style={{
               backgroundColor:
                 currentViewResponsive === "playlist" ? "green" : "black",
-              color: "white",
-              border: "none",
-              margin: "12px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              flex: 1,
             }}
             onClick={() => setCurrentViewResponsive("playlist")}
           >
@@ -216,16 +200,10 @@ const MusicPlayerComponent = () => {
             <span>PlayLists</span>
           </button>
           <button
+            className="song-button"
             style={{
               backgroundColor:
                 currentViewResponsive === "songs" ? "green" : "black",
-              color: "white",
-              border: "none",
-              margin: "12px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              flex: 1,
             }}
             onClick={() => setCurrentViewResponsive("songs")}
           >
@@ -233,16 +211,10 @@ const MusicPlayerComponent = () => {
             <span>Songs</span>
           </button>
           <button
+            className="player-button"
             style={{
               backgroundColor:
                 currentViewResponsive === "player" ? "green" : "black",
-              color: "white",
-              border: "none",
-              margin: "12px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              flex: 1,
             }}
             onClick={() => setCurrentViewResponsive("player")}
           >
@@ -255,4 +227,4 @@ const MusicPlayerComponent = () => {
   );
 };
 
-export default MusicPlayerComponent;
+export default MainComponent;

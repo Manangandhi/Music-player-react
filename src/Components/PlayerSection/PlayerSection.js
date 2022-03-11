@@ -5,7 +5,7 @@ import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import PlayArrow from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
-import PlaceholderImage from "../assets/images/player-placeholder.png";
+import PlaceholderImage from "../../assets/images/player-placeholder.png";
 import "./PlayerSection.css";
 
 const PlayerSection = ({

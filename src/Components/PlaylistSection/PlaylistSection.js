@@ -1,7 +1,7 @@
 import { CircularProgress } from "@mui/material";
-import "./NavigationBar.css";
+import "./PlaylistSection.css";
 
-const NavigationBar = ({
+const PlaylistSection = ({
   handleSelectPlayList,
   setCurrentViewResponsive,
   selectedPlaylist,
@@ -56,4 +56,4 @@ const NavigationBar = ({
   );
 };
 
-export default NavigationBar;
+export default PlaylistSection;

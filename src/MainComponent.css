@@ -1,0 +1,20 @@
+.responsive-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: max-content;
+  width: 100%;
+}
+
+.playlist-button,
+.player-button,
+.song-button {
+  color: white;
+  border: none;
+  margin: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  cursor: pointer;
+}

@@ -1,10 +1,10 @@
 import { CircularProgress } from "@mui/material";
 import moment from "moment";
 import momentDurationFormatSetup from "moment-duration-format";
-import "./ListItems.css";
+import "./SongList.css";
 
 momentDurationFormatSetup(moment);
-const ListItems = ({ songs, loading, handleSongClick, selectedSong }) => {
+const SongList = ({ songs, loading, handleSongClick, selectedSong }) => {
   return (
     <ul className="list-container">
       {loading ? (
@@ -51,4 +51,4 @@ const ListItems = ({ songs, loading, handleSongClick, selectedSong }) => {
   );
 };
 
-export default ListItems;
+export default SongList;

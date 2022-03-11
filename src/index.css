@@ -7,6 +7,4 @@
 @font-face {
   font-family: "MyFont";
   src: local("MyFont"), url(./fonts/BasierCircle-Regular.otf) format("opentype");
-  /* other formats include: 'woff2', 'truetype, 'opentype',
-                            'embedded-opentype', and 'svg' */
 }
