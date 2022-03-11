@@ -10,7 +10,7 @@ import { useMediaQuery } from "@mui/material";
 import { GET_PLAYLISTS } from "./GraphQL/playListQuery";
 import { useQuery } from "@apollo/client";
 import { GET_SONGS } from "./GraphQL/songQuery";
-import "./MainComponent.css";
+import "./assets/css/MainComponent.css";
 
 const fac = new FastAverageColor();
 let googleProxyURL =

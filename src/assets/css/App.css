@@ -1,3 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "MyFont";
+  src: local("MyFont"),
+    url(../fonts/BasierCircle-Regular.otf) format("opentype");
+}
+
 body {
   font-family: "MyFont";
 }
