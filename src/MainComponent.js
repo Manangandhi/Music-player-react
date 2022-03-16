@@ -91,6 +91,15 @@ const MainComponent = () => {
       });
     } else {
       //  If same song is clicked again
+      mediaElement.current.pause();
+      mediaElement.current.src = song.url;
+      mediaElement.current.play();
+      setSelectedSong({
+        ...song,
+        status: "play",
+        idx: idx,
+        playlistId: selectedPlaylist?.id,
+      });
     }
   };
 
