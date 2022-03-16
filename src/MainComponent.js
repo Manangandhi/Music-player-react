@@ -20,8 +20,6 @@ const MainComponent = () => {
   const [selectedPlaylist, setSelectedPlaylist] = useState();
   const [selectedSong, setSelectedSong] = useState();
 
-  const isMobile = useMediaQuery("(max-width:980px)");
-
   const [appBgColor, setAppBgColor] = useState("black");
 
   const [nowPlaying, setNowPlaying] = useState({
@@ -29,12 +27,18 @@ const MainComponent = () => {
     queue: [],
   });
 
+  const [searchInput, setSearchInput] = useState("");
+
   const [playLists, setPlayLists] = useState([]);
+
+  const [currentViewResponsive, setCurrentViewResponsive] = useState("player");
+
+  const mediaElement = useRef(null);
+
+  const isMobile = useMediaQuery("(max-width:980px)");
 
   const { data: playListData, loading: playListLoading } =
     useQuery(GET_PLAYLISTS);
-
-  const [searchInput, setSearchInput] = useState("");
 
   const handleInputChange = (e) => {
     let lowerCase = e.target.value.toLowerCase();
@@ -53,12 +57,11 @@ const MainComponent = () => {
     setSelectedPlaylist(selectedPlaylist);
   }, []);
 
-  const mediaElement = useRef(null);
-
   const playMusic = (song, idx) => {
     if (!mediaElement.current) {
       mediaElement.current = new Audio(song?.url);
     }
+
     if (!song) {
       mediaElement.current.play();
       return setSelectedSong((s) => ({
@@ -125,6 +128,7 @@ const MainComponent = () => {
     }
   }, [playListData, handleSelectPlayList, selectedPlaylist]);
 
+  // Image Gredient
   useEffect(() => {
     if (selectedSong?._id) {
       const newImg = new Image();
@@ -143,8 +147,6 @@ const MainComponent = () => {
         });
     }
   }, [selectedSong?._id, selectedSong?.photo]);
-
-  const [currentViewResponsive, setCurrentViewResponsive] = useState("player");
 
   return (
     <div
@@ -184,6 +186,7 @@ const MainComponent = () => {
           rewindMusic={rewindMusic}
           forwardMusic={forwardMusic}
           isMobile={isMobile}
+          mediaElement={mediaElement}
         />
       )}
       {isMobile && (

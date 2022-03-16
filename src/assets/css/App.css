@@ -28,3 +28,7 @@ body {
   overflow: hidden;
   transition: all 1s linear;
 }
+
+.MuiPopover-paper {
+  background-color: black !important;
+}

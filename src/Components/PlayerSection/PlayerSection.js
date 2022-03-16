@@ -1,4 +1,5 @@
-import { LinearProgress } from "@mui/material";
+import { useState } from "react";
+import { LinearProgress, Popover, Slider } from "@mui/material";
 import FastRewindIcon from "@mui/icons-material/FastRewind";
 import FastForwardIcon from "@mui/icons-material/FastForward";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
@@ -15,7 +16,25 @@ const PlayerSection = ({
   rewindMusic,
   forwardMusic,
   isMobile,
+  trackProgress,
+  mediaElement,
 }) => {
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const open = Boolean(anchorEl);
+
+  const handleVolumeBtn = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleVolumeChange = (e) => {
+    mediaElement.current.volume = e.target.value / 100;
+  };
+
   return (
     <div
       className="playersection-main-wrapper"
@@ -37,7 +56,7 @@ const PlayerSection = ({
 
         <LinearProgress
           variant="determinate"
-          value={50}
+          value={10}
           sx={styles.progressBar}
         />
 
@@ -99,11 +118,45 @@ const PlayerSection = ({
               />
             </button>
           </div>
+
           <button type="button" className="volume-button">
-            <VolumeUpIcon sx={styles.commonButtonWrapper} />
+            <VolumeUpIcon
+              sx={styles.commonButtonWrapper}
+              onClick={handleVolumeBtn}
+            />
           </button>
         </div>
       </div>
+      <Popover
+        id={"id"}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+        transformOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+      >
+        <Slider
+          sx={{
+            '& input[type="range"]': {
+              WebkitAppearance: "slider-vertical",
+            },
+            height: "150px",
+            marginBottom: "10px",
+            backgroundColor: "black",
+            overflow: "hidden",
+          }}
+          orientation="vertical"
+          defaultValue={mediaElement?.current?.volume * 100 || 100}
+          aria-label="volume"
+          onChange={handleVolumeChange}
+        />
+      </Popover>
     </div>
   );
 };
