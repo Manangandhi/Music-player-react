@@ -35,8 +35,6 @@ const PlayerSection = ({
     mediaElement.current.volume = e.target.value / 100;
   };
 
-  console.log(selectedSong);
-
   return (
     <div
       className="playersection-main-wrapper"
