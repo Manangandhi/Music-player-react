@@ -33,7 +33,14 @@ const MainComponent = () => {
 
   const [currentViewResponsive, setCurrentViewResponsive] = useState("player");
 
+  // Audio Ref
   const mediaElement = useRef(null);
+
+  // Reference to Progress bar
+  const progressBar = useRef();
+
+  // Animation Ref
+  const animationRef = useRef();
 
   const isMobile = useMediaQuery("(max-width:980px)");
 
@@ -64,6 +71,7 @@ const MainComponent = () => {
 
     if (!song) {
       mediaElement.current.play();
+      animationRef.current = requestAnimationFrame(whilePlaying);
       return setSelectedSong((s) => ({
         ...s,
         status: "play",
@@ -73,6 +81,9 @@ const MainComponent = () => {
     }
     if (!selectedSong) {
       mediaElement.current.play();
+
+      animationRef.current = requestAnimationFrame(whilePlaying);
+
       setSelectedSong({
         ...song,
         status: "play",
@@ -83,6 +94,7 @@ const MainComponent = () => {
       mediaElement.current.pause();
       mediaElement.current.src = song.url;
       mediaElement.current.play();
+
       setSelectedSong({
         ...song,
         status: "play",
@@ -106,8 +118,16 @@ const MainComponent = () => {
   const pauseMusic = () => {
     if (selectedSong && mediaElement.current) {
       mediaElement.current.pause();
+      cancelAnimationFrame(animationRef.current);
     }
     setSelectedSong((song) => ({ ...song, status: "pause" }));
+  };
+
+  const whilePlaying = () => {
+    if (mediaElement.current) {
+      progressBar.current.value = mediaElement.current.currentTime;
+      animationRef.current = requestAnimationFrame(whilePlaying);
+    }
   };
 
   const rewindMusic = () => {
@@ -157,6 +177,17 @@ const MainComponent = () => {
     }
   }, [selectedSong?._id, selectedSong?.photo]);
 
+  useEffect(() => {
+    if (mediaElement.current) {
+      const seconds = Math.floor(mediaElement.current.duration);
+      progressBar.current.max = seconds;
+    }
+  }, []);
+
+  const handleRangeChange = () => {
+    mediaElement.current.currentTime = progressBar.current.value;
+  };
+
   return (
     <div
       className="App-container"
@@ -196,6 +227,8 @@ const MainComponent = () => {
           forwardMusic={forwardMusic}
           isMobile={isMobile}
           mediaElement={mediaElement}
+          progressBar={progressBar}
+          handleRangeChange={handleRangeChange}
         />
       )}
       {isMobile && (

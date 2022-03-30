@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { LinearProgress, Popover, Slider } from "@mui/material";
+import { Popover, Slider } from "@mui/material";
 import FastRewindIcon from "@mui/icons-material/FastRewind";
 import FastForwardIcon from "@mui/icons-material/FastForward";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
@@ -16,8 +16,9 @@ const PlayerSection = ({
   rewindMusic,
   forwardMusic,
   isMobile,
-  trackProgress,
+  progressBar,
   mediaElement,
+  handleRangeChange,
 }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -54,10 +55,18 @@ const PlayerSection = ({
 
         {/* Progress bar */}
 
-        <LinearProgress
-          variant="determinate"
-          value={10}
-          sx={styles.progressBar}
+        <input
+          type="range"
+          ref={progressBar}
+          defaultValue={0}
+          style={{
+            width: "100%",
+            display: "flex",
+            marginTop: "30px",
+            marginBottom: "20px",
+            cursor: "pointer",
+          }}
+          onChange={handleRangeChange}
         />
 
         {/* Player Buttons */}
@@ -164,12 +173,6 @@ const PlayerSection = ({
 export default PlayerSection;
 
 const styles = {
-  progressBar: {
-    width: "100%",
-    display: "flex",
-    marginTop: "30px",
-    marginBottom: "20px",
-  },
   optionButton: { color: "white" },
   commonButtonWrapper: { color: "white" },
   playButton: { color: "black" },
