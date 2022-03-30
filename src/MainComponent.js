@@ -81,9 +81,7 @@ const MainComponent = () => {
     }
     if (!selectedSong) {
       mediaElement.current.play();
-
       animationRef.current = requestAnimationFrame(whilePlaying);
-
       setSelectedSong({
         ...song,
         status: "play",

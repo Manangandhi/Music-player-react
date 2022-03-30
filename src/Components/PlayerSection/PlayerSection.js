@@ -3,7 +3,6 @@ import { Popover, Slider } from "@mui/material";
 import FastRewindIcon from "@mui/icons-material/FastRewind";
 import FastForwardIcon from "@mui/icons-material/FastForward";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import PlayArrow from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
 import PlaceholderImage from "../../assets/images/player-placeholder.png";
@@ -71,9 +70,7 @@ const PlayerSection = ({
 
         {/* Player Buttons */}
         <div className="button-container">
-          <button type="button" className="option-button">
-            <MoreHorizIcon sx={styles.optionButton} />
-          </button>
+          <button type="button" className="option-button"></button>
           <div>
             {/* Rewind Button */}
             <button
@@ -173,7 +170,6 @@ const PlayerSection = ({
 export default PlayerSection;
 
 const styles = {
-  optionButton: { color: "white" },
   commonButtonWrapper: { color: "white" },
   playButton: { color: "black" },
   buttonDisabled: {
