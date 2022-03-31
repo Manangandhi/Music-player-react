@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Popover, Slider } from "@mui/material";
 import FastRewindIcon from "@mui/icons-material/FastRewind";
 import FastForwardIcon from "@mui/icons-material/FastForward";
@@ -7,18 +7,24 @@ import PlayArrow from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
 import PlaceholderImage from "../../assets/images/player-placeholder.png";
 import "./PlayerSection.css";
+import globalContext from "../../context/globalContext";
 
-const PlayerSection = ({
-  selectedSong,
-  playMusic,
-  pauseMusic,
-  rewindMusic,
-  forwardMusic,
-  isMobile,
-  progressBar,
-  mediaElement,
-  handleRangeChange,
-}) => {
+const PlayerSection = () => {
+  const {
+    selectedSong,
+    playMusic,
+    pauseMusic,
+    rewindMusic,
+    forwardMusic,
+    // Mobile Width
+    isMobile,
+    // Ref
+    mediaElement,
+    progressBar,
+    // Handle Change Function
+    handleRangeChange,
+  } = useContext(globalContext);
+
   const [anchorEl, setAnchorEl] = useState(null);
 
   const open = Boolean(anchorEl);
@@ -66,6 +72,7 @@ const PlayerSection = ({
             cursor: "pointer",
           }}
           onChange={handleRangeChange}
+          disabled={!selectedSong}
         />
 
         {/* Player Buttons */}

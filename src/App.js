@@ -8,6 +8,7 @@ import {
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 import MainComponent from "./MainComponent";
+import GlobalContextProvider from "./context/globalContextProvider";
 
 const errorLink = onError(({ graphqlErrors, networkError }) => {
   if (graphqlErrors) {
@@ -30,9 +31,11 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <div className="App">
-        <MainComponent />
-      </div>
+      <GlobalContextProvider>
+        <div className="App">
+          <MainComponent />
+        </div>
+      </GlobalContextProvider>
     </ApolloProvider>
   );
 }

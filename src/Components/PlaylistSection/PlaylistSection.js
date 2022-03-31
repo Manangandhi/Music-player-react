@@ -1,13 +1,19 @@
 import { CircularProgress } from "@mui/material";
+import { useContext } from "react";
+import globalContext from "../../context/globalContext";
 import "./PlaylistSection.css";
 
-const PlaylistSection = ({
-  handleSelectPlayList,
-  setCurrentViewResponsive,
-  selectedPlaylist,
-  loading,
-  playLists,
-}) => {
+const PlaylistSection = () => {
+  const {
+    playLists,
+    selectedPlaylist,
+    setCurrentViewResponsive,
+    // Graphql API data
+    playListLoading,
+    // Handle Change function
+    handleSelectPlayList,
+  } = useContext(globalContext);
+
   const handleClickPlaylist = (li) => {
     handleSelectPlayList(li);
     setCurrentViewResponsive("songs");
@@ -23,7 +29,7 @@ const PlaylistSection = ({
 
       <div className="navigation-list-container">
         <ul>
-          {loading ? (
+          {playListLoading ? (
             <CircularProgress
               color="primary"
               sx={{

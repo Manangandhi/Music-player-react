@@ -1,18 +1,22 @@
 import { CircularProgress } from "@mui/material";
 import moment from "moment";
 import momentDurationFormatSetup from "moment-duration-format";
+import { useContext } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import globalContext from "../../../context/globalContext";
 import "./SongList.css";
 
 momentDurationFormatSetup(moment);
-const SongList = ({ songs, loading, handleSongClick, selectedSong }) => {
+const SongList = ({ handleSongClick }) => {
+  const { selectedSong, songsData, songsLoading } = useContext(globalContext);
+
   return (
     <ul className="list-container">
-      {loading && (
+      {songsLoading && (
         <CircularProgress color="primary" sx={{ marginTop: "100px" }} />
       )}
-      <TransitionGroup appear={true} in={loading}>
-        {songs?.map((song, idx) => {
+      <TransitionGroup appear={true} in={songsLoading}>
+        {songsData?.getSongs?.map((song, idx) => {
           return (
             <CSSTransition
               key={song._id}

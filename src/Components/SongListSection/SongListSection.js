@@ -1,20 +1,23 @@
 import SongList from "./SongList/SongList";
 import SearchBar from "./Searchbar/SearchBar";
 import "./SongListSection.css";
+import { useContext } from "react";
+import globalContext from "../../context/globalContext";
 
-const Sidebar = ({
-  selectedPlaylist,
-  playMusic,
-  setNowPlaying,
-  selectedSong,
-  handleInputChange,
-  data,
-  loading,
-}) => {
+const Sidebar = () => {
+  const {
+    setNowPlaying,
+    selectedPlaylist,
+    songsData,
+    // Functions
+    playMusic,
+    handleInputChange,
+  } = useContext(globalContext);
+
   const handleSongClick = (song, idx) => {
     setNowPlaying({
       playlistId: selectedPlaylist?.id,
-      queue: data?.getSongs || [],
+      queue: songsData?.getSongs || [],
     });
     playMusic(song, idx);
   };
@@ -24,12 +27,7 @@ const Sidebar = ({
         {selectedPlaylist?.title || "For You"}
       </h1>
       <SearchBar handleChange={handleInputChange} />
-      <SongList
-        loading={loading}
-        songs={data?.getSongs}
-        handleSongClick={handleSongClick}
-        selectedSong={selectedSong}
-      />
+      <SongList handleSongClick={handleSongClick} />
     </div>
   );
 };
