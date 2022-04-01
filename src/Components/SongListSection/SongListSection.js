@@ -6,20 +6,14 @@ import globalContext from "../../context/globalContext";
 
 const Sidebar = () => {
   const {
-    setNowPlaying,
     selectedPlaylist,
-    songsData,
     // Functions
     playMusic,
     handleInputChange,
   } = useContext(globalContext);
 
   const handleSongClick = (song, idx) => {
-    setNowPlaying({
-      playlistId: selectedPlaylist?.id,
-      queue: songsData?.getSongs || [],
-    });
-    playMusic(song, idx);
+    playMusic(song, idx, true);
   };
   return (
     <div className="sidebar-container">

@@ -43,7 +43,7 @@ const GlobalContextProvider = ({ children }) => {
   });
 
   // Functions
-  const playMusic = (song, idx) => {
+  const playMusic = (song, idx, listItemFlag) => {
     if (!mediaElement.current) {
       mediaElement.current = new Audio(song?.url);
     }
@@ -51,7 +51,11 @@ const GlobalContextProvider = ({ children }) => {
     if (!song) {
       mediaElement.current.play();
       animationRef.current = requestAnimationFrame(whilePlaying);
-      return setSelectedSong((s) => ({
+      setNowPlaying({
+        playlistId: selectedPlaylist?.id,
+        queue: songsData?.getSongs || [],
+      });
+      setSelectedSong((s) => ({
         ...s,
         status: "play",
         idx: idx,
@@ -67,23 +71,33 @@ const GlobalContextProvider = ({ children }) => {
         idx: idx,
         playlistId: selectedPlaylist?.id,
       });
+      setNowPlaying({
+        playlistId: selectedPlaylist?.id,
+        queue: songsData?.getSongs || [],
+      });
     } else if (selectedSong._id !== song._id) {
       mediaElement.current.pause();
       mediaElement.current.src = song.url;
       mediaElement.current.play();
-
-      animationRef.current = requestAnimationFrame(whilePlaying);
+      // animationRef.current = requestAnimationFrame(whilePlaying);
       setSelectedSong({
         ...song,
         status: "play",
         idx: idx,
         playlistId: selectedPlaylist?.id,
       });
+      setNowPlaying({
+        playlistId: selectedPlaylist?.id,
+        queue: songsData?.getSongs || [],
+      });
     } else {
       //  If same song is clicked again
-      mediaElement.current.pause();
-      mediaElement.current.src = song.url;
+      if (listItemFlag) {
+        mediaElement.current.pause();
+        mediaElement.current.src = song.url;
+      }
       mediaElement.current.play();
+
       animationRef.current = requestAnimationFrame(whilePlaying);
       setSelectedSong({
         ...song,

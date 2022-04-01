@@ -108,7 +108,7 @@ const PlayerSection = () => {
               </button>
             ) : (
               <button
-                onClick={() => playMusic()}
+                onClick={() => playMusic(selectedSong, selectedSong?.idx)}
                 type="button"
                 className="play-button"
                 disabled={!selectedSong}
@@ -117,7 +117,7 @@ const PlayerSection = () => {
               </button>
             )}
             <button
-              onClick={() => forwardMusic(selectedSong)}
+              onClick={() => forwardMusic()}
               type="button"
               className="forward-button"
               disabled={!selectedSong}
