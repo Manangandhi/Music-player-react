@@ -23,6 +23,7 @@ const PlayerSection = () => {
     progressBar,
     // Handle Change Function
     handleRangeChange,
+    next,
   } = useContext(globalContext);
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -50,6 +51,7 @@ const PlayerSection = () => {
         <h1 className="title-content">{selectedSong?.title}</h1>
 
         <span className="subTitle-content">{selectedSong?.artist}</span>
+        <audio onEnded={next} ref={mediaElement} hidden></audio>
 
         {/* Cover photo */}
         <img

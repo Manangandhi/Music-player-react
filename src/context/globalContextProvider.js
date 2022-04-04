@@ -43,13 +43,10 @@ const GlobalContextProvider = ({ children }) => {
   });
 
   // Functions
-  const playMusic = (song, idx, listItemFlag) => {
-    if (!mediaElement.current) {
-      mediaElement.current = new Audio(song?.url);
-    }
-
+  const playMusic = async (song, idx, listItemFlag) => {
     if (!song) {
-      mediaElement.current.play();
+      mediaElement.current.src = song?.url;
+      await mediaElement.current.play();
       animationRef.current = requestAnimationFrame(whilePlaying);
       setNowPlaying({
         playlistId: selectedPlaylist?.id,
@@ -63,7 +60,8 @@ const GlobalContextProvider = ({ children }) => {
       }));
     }
     if (!selectedSong) {
-      mediaElement.current.play();
+      mediaElement.current.src = song?.url;
+      await mediaElement.current.play();
       animationRef.current = requestAnimationFrame(whilePlaying);
       setSelectedSong({
         ...song,
@@ -78,7 +76,7 @@ const GlobalContextProvider = ({ children }) => {
     } else if (selectedSong._id !== song._id) {
       mediaElement.current.pause();
       mediaElement.current.src = song.url;
-      mediaElement.current.play();
+      await mediaElement.current.play();
       setSelectedSong({
         ...song,
         status: "play",
@@ -95,8 +93,7 @@ const GlobalContextProvider = ({ children }) => {
         mediaElement.current.pause();
         mediaElement.current.src = song.url;
       }
-      mediaElement.current.play();
-
+      await mediaElement.current.play();
       animationRef.current = requestAnimationFrame(whilePlaying);
       setSelectedSong({
         ...song,
@@ -159,13 +156,19 @@ const GlobalContextProvider = ({ children }) => {
     mediaElement.current.currentTime = progressBar.current.value;
   };
 
+  const next = () => {
+    if (mediaElement.current.ended) {
+      forwardMusic();
+    }
+  };
+
   // Progress bar Effect
   useEffect(() => {
     if (mediaElement.current) {
       const seconds = Math.floor(mediaElement.current.duration);
       progressBar.current.max = seconds;
     }
-  }, []);
+  }, [selectedSong?._id]);
 
   // By default select First Playlist
   useEffect(() => {
@@ -236,6 +239,7 @@ const GlobalContextProvider = ({ children }) => {
     handleSelectPlayList,
     handleRangeChange,
     handleInputChange,
+    next,
 
     // Ref
     mediaElement,
