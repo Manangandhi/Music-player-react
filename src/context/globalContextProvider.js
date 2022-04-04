@@ -79,7 +79,6 @@ const GlobalContextProvider = ({ children }) => {
       mediaElement.current.pause();
       mediaElement.current.src = song.url;
       mediaElement.current.play();
-      // animationRef.current = requestAnimationFrame(whilePlaying);
       setSelectedSong({
         ...song,
         status: "play",

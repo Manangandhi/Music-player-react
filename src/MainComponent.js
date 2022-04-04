@@ -5,7 +5,6 @@ import ListIcon from "@mui/icons-material/List";
 import PlaylistSection from "./Components/PlaylistSection/PlaylistSection";
 import PlayerSection from "./Components/PlayerSection/PlayerSection";
 import SongListSection from "./Components/SongListSection/SongListSection";
-
 import "./assets/css/MainComponent.css";
 import globalContext from "./context/globalContext";
 

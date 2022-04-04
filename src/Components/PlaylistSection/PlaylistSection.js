@@ -30,13 +30,7 @@ const PlaylistSection = () => {
       <div className="navigation-list-container">
         <ul>
           {playListLoading ? (
-            <CircularProgress
-              color="primary"
-              sx={{
-                width: "100%",
-                marginTop: "30px",
-              }}
-            />
+            <CircularProgress color="primary" sx={styles.loadingStyle} />
           ) : (
             playLists?.map((li) => {
               return (
@@ -60,6 +54,13 @@ const PlaylistSection = () => {
       </div>
     </div>
   );
+};
+
+const styles = {
+  loadingStyle: {
+    width: "100%",
+    marginTop: "30px",
+  },
 };
 
 export default PlaylistSection;

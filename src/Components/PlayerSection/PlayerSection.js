@@ -64,13 +64,7 @@ const PlayerSection = () => {
           type="range"
           ref={progressBar}
           defaultValue={0}
-          style={{
-            width: "100%",
-            display: "flex",
-            marginTop: "30px",
-            marginBottom: "20px",
-            cursor: "pointer",
-          }}
+          style={styles.progress}
           onChange={handleRangeChange}
           disabled={!selectedSong}
         />
@@ -182,5 +176,12 @@ const styles = {
   buttonDisabled: {
     color: "gray",
     padding: "5px",
+  },
+  progress: {
+    width: "100%",
+    display: "flex",
+    marginTop: "30px",
+    marginBottom: "20px",
+    cursor: "pointer",
   },
 };
