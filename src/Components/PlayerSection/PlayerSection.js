@@ -77,7 +77,7 @@ const PlayerSection = () => {
         <div className="button-container">
           <button
             type="button"
-            onClick={() => repeatMusic(selectedSong)}
+            onClick={() => repeatMusic(selectedSong, selectedSong?.idx)}
             className="option-button"
             disabled={!selectedSong}
           >
