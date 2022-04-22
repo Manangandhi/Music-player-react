@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useQuery } from "@apollo/client";
-import FastAverageColor from "fast-average-color";
 import globalContext from "./globalContext";
 import { GET_PLAYLISTS } from "../GraphQL/playListQuery";
 import { GET_SONGS } from "../GraphQL/songQuery";
@@ -10,7 +9,6 @@ const GlobalContextProvider = ({ children }) => {
   // All States
   const [selectedPlaylist, setSelectedPlaylist] = useState();
   const [selectedSong, setSelectedSong] = useState();
-  const [appBgColor, setAppBgColor] = useState("black");
   const [nowPlaying, setNowPlaying] = useState({
     playlistId: null,
     queue: [],
@@ -137,6 +135,16 @@ const GlobalContextProvider = ({ children }) => {
     }
   };
 
+  const repeatMusic = (song, idx) => {
+    console.log(song);
+
+    mediaElement.current.pause();
+    mediaElement.current.src = song.url;
+
+    mediaElement.current.play();
+    animationRef.current = requestAnimationFrame(whilePlaying);
+  };
+
   // Function for select playlist
   const handleSelectPlayList = useCallback(
     (selectedPlaylist) => {
@@ -180,37 +188,12 @@ const GlobalContextProvider = ({ children }) => {
     }
   }, [playListData, handleSelectPlayList, selectedPlaylist, setPlayLists]);
 
-  // Image Gredient
-  useEffect(() => {
-    const fac = new FastAverageColor();
-    let googleProxyURL =
-      "https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&refresh=2592000&url=";
-
-    if (selectedSong?._id) {
-      const newImg = new Image();
-      let newSrc = googleProxyURL + encodeURIComponent(selectedSong?.photo);
-      newImg.src = newSrc;
-      newImg.crossOrigin = "Anonymous";
-      fac
-        .getColorAsync(newImg)
-        .then((color) => {
-          setAppBgColor(
-            `linear-gradient(to top, rgba(0,0,0) 0%, ${color.rgba} 100%)`
-          );
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    }
-  }, [selectedSong?._id, selectedSong?.photo, setAppBgColor]);
-
   const value = {
     selectedPlaylist,
     setSelectedPlaylist,
     selectedSong,
     setSelectedSong,
-    appBgColor,
-    setAppBgColor,
+
     nowPlaying,
     setNowPlaying,
     searchInput,
@@ -234,6 +217,7 @@ const GlobalContextProvider = ({ children }) => {
     pauseMusic,
     rewindMusic,
     forwardMusic,
+    repeatMusic,
 
     // handleChange functions
     handleSelectPlayList,

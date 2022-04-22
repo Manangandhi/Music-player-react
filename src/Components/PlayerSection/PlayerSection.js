@@ -5,6 +5,7 @@ import FastForwardIcon from "@mui/icons-material/FastForward";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import PlayArrow from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
+import RepeatIcon from "@mui/icons-material/Repeat";
 import PlaceholderImage from "../../assets/images/player-placeholder.png";
 import "./PlayerSection.css";
 import globalContext from "../../context/globalContext";
@@ -16,6 +17,7 @@ const PlayerSection = () => {
     pauseMusic,
     rewindMusic,
     forwardMusic,
+    repeatMusic,
     // Mobile Width
     isMobile,
     // Ref
@@ -73,7 +75,20 @@ const PlayerSection = () => {
 
         {/* Player Buttons */}
         <div className="button-container">
-          <button type="button" className="option-button"></button>
+          <button
+            type="button"
+            onClick={() => repeatMusic(selectedSong)}
+            className="option-button"
+            disabled={!selectedSong}
+          >
+            <RepeatIcon
+              sx={
+                !selectedSong
+                  ? styles.buttonDisabled
+                  : styles.commonButtonWrapper
+              }
+            />
+          </button>
           <div>
             {/* Rewind Button */}
             <button
@@ -100,7 +115,13 @@ const PlayerSection = () => {
                 className="play-button"
                 disabled={!selectedSong}
               >
-                <PauseIcon sx={styles.playButton} />
+                <PauseIcon
+                  sx={
+                    !selectedSong
+                      ? styles.buttonDisabled
+                      : styles.commonButtonWrapper
+                  }
+                />
               </button>
             ) : (
               <button
@@ -109,7 +130,13 @@ const PlayerSection = () => {
                 className="play-button"
                 disabled={!selectedSong}
               >
-                <PlayArrow sx={styles.playButton} />
+                <PlayArrow
+                  sx={
+                    !selectedSong
+                      ? styles.buttonDisabled
+                      : styles.commonButtonWrapper
+                  }
+                />
               </button>
             )}
             <button
@@ -130,7 +157,11 @@ const PlayerSection = () => {
 
           <button type="button" className="volume-button">
             <VolumeUpIcon
-              sx={styles.commonButtonWrapper}
+              sx={
+                !selectedSong
+                  ? styles.buttonDisabled
+                  : styles.commonButtonWrapper
+              }
               onClick={handleVolumeBtn}
             />
           </button>
@@ -176,8 +207,7 @@ const styles = {
   commonButtonWrapper: { color: "white" },
   playButton: { color: "black" },
   buttonDisabled: {
-    color: "gray",
-    padding: "5px",
+    color: "white",
   },
   progress: {
     width: "100%",

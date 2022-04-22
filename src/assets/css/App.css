@@ -26,7 +26,13 @@ body {
   height: 100vh;
   width: 100%;
   overflow: hidden;
-  transition: all 1s linear;
+  transition: all 0.4s linear;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  background-color: black;
 }
 
 .MuiPopover-paper {

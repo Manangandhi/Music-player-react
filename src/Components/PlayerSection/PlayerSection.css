@@ -51,43 +51,12 @@
   width: 100%;
 }
 
-.option-button {
-  background-color: black;
-  border-radius: 15px;
-  height: 30px;
-  border: none;
-  width: 30px;
-  margin: 6px;
-}
-
-.play-button {
-  background-color: white;
-  border-radius: 15px;
-  height: 30px;
-  border: none;
-  cursor: pointer;
-  width: 30px;
-  margin: 6px;
-  padding: 2px;
-}
-
-.play-button:disabled {
-  background-color: gray;
-}
-
-.volume-button {
-  background-color: rgba(255, 255, 255, 0.15);
-  border-radius: 15px;
-  height: 30px;
-  border: none;
-  cursor: pointer;
-  width: 30px;
-  margin: 6px;
-}
-
 .rewind-button,
-.forward-button {
-  background-color: black;
+.forward-button,
+.option-button,
+.play-button,
+.volume-button {
+  background-color: rgba(39, 39, 39, 0);
   border-radius: 15px;
   height: 30px;
   border: none;
